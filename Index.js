@@ -8,12 +8,12 @@ const UserRoute = require('./routes/UserRoute')
 const BlogRoute = require('./routes/BlogRoute')
 const Contactroute = require('./routes/ContactRoute')
 const OfferRoute = require('./routes/OfferRoute')
-const cron = require('node-cron');
+// const cron = require('node-cron');
 const Offer = require('./models/OfferModel');
 const MockUpRoute = require('./routes/MockupRoute')
 
 // Initialize the scheduled jobs
-scheduleJobs();
+// scheduleJobs();
 
 app.use(cors());
 app.use(express.json());
