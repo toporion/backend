@@ -9,14 +9,14 @@ const UserRoute=require('./routes/UserRoute')
 const BlogRoute=require('./routes/BlogRoute')
 const Contactroute=require('./routes/ContactRoute')
 const OfferRoute=require('./routes/OfferRoute')
-const cron = require('node-cron');
+// const cron = require('node-cron');
 const Offer = require('./models/OfferModel');
 const MockUpRoute=require('./routes/MockupRoute')
 const port = process.env.PORT || 8080;
 
 
 // Initialize the scheduled jobs
-scheduleJobs();
+// scheduleJobs();
 
 app.use(cors());
 app.use(express.json());
@@ -29,19 +29,19 @@ app.use('/api/mockUp',MockUpRoute)
 
 
 // Schedule the cron job to run every day at midnight
-cron.schedule('0 0 * * *', async () => {
-  try {
-      const now = new Date();
-      const expiredOffers = await Offer.updateMany(
-          { endDate: { $lt: now }, isActive: true },
-          { $set: { isActive: false } }
-      );
-
-      console.log(`${expiredOffers.modifiedCount} offers expired and deactivated.`);
-  } catch (error) {
-      console.error('Error deactivating expired offers:', error.message);
-  }
-});
+// cron.schedule('0 0 * * *', async () => {
+//   try {
+//       const now = new Date();
+//       const expiredOffers = await Offer.updateMany(
+//           { endDate: { $lt: now }, isActive: true },
+//           { $set: { isActive: false } }
+//       );
+// zz
+//       console.log(`${expiredOffers.modifiedCount} offers expired and deactivated.`);
+//   } catch (error) {
+//       console.error('Error deactivating expired offers:', error.message);
+//   }
+// });
 
 console.log("Cron job for offer expiration set up!");
 
@@ -52,8 +52,8 @@ app.get('/', (req, res) => {
 
 
 
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 module.exports = app;
