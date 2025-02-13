@@ -25,19 +25,19 @@ app.use('/api/offer', OfferRoute)
 app.use('/api/mockUp', MockUpRoute)
 
 // Schedule the cron job to run every day at midnight
-cron.schedule('0 0 * * *', async () => {
-  try {
-    const now = new Date();
-    const expiredOffers = await Offer.updateMany(
-      { endDate: { $lt: now }, isActive: true },
-      { $set: { isActive: false } }
-    );
+// cron.schedule('0 0 * * *', async () => {
+//   try {
+//     const now = new Date();
+//     const expiredOffers = await Offer.updateMany(
+//       { endDate: { $lt: now }, isActive: true },
+//       { $set: { isActive: false } }
+//     );
 
-    console.log(`${expiredOffers.modifiedCount} offers expired and deactivated.`);
-  } catch (error) {
-    console.error('Error deactivating expired offers:', error.message);
-  }
-});
+//     console.log(`${expiredOffers.modifiedCount} offers expired and deactivated.`);
+//   } catch (error) {
+//     console.error('Error deactivating expired offers:', error.message);
+//   }
+// });
 
 console.log("Cron job for offer expiration set up!");
 
